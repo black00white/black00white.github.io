@@ -152,6 +152,214 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-阿里云上传图片（服务器签名后直传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/18/阿里云上传图片（服务器签名后直传）/">&#39;阿里云上传图片（服务器签名后直传）&#39;</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/18/阿里云上传图片（服务器签名后直传）/" class="archive-article-date">
+  	<time datetime="2019-04-18T01:28:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前上传图片、文件一般都在七牛云，近期由于公司的服务器等资源全部都在阿里云，上传图片也改为了阿里云直传。我们目前采用的是服务器端签名后直传的方式，据说说下前端的实现：<br>刚开始我们采用的是没有处理图片信息，先请求接口从服务器端获取到阿里云的签名信息，然后直接上传的从本地获取到的file文件：</p>
+<pre>
+uploadImg() {
+      let data = this.data;//服务器返回给你的签名信息，因为我们是用vue是实现的，获取签名成功后数据保存在data里
+      const key = data.dir + new Date().getTime() + '_' + this.file.name;
+      var request = new FormData(),
+      request.append("OSSAccessKeyId", data.accessid); //Bucket 拥有者的Access Key Id。
+      request.append("policy", data.policy); //policy规定了请求的表单域的合法性
+      request.append("Signature", data.signature); //根据Access Key Secret和policy计算的签名信息，OSS验证该签名信息从而验证该Post请求的合法性
+      request.append("key", key); //文件名字，可设置路径
+      request.append("success_action_status", "200"); // 让服务端返回200,不然，默认会返回204
+      request.append('file', this.file);//需要上传的文件 file
+
+      axios({
+        url: data.host,//需要上传的阿里云url
+        data: request,
+        method: "post",
+        headers: { "Content-Type": "multipart/form-data" }//因为是formData形式上传的，所以需要加上这句
+      })
+        .then(res => {
+          return res.data;
+        })
+        .then(rst => {
+          this.imgUrl = data.host + "/" + key;
+        });
+    },
+</pre>
+后来发现这种上传手机原图，图比较大的情况，上传会特别慢，从阿里云下载的时候图片加载也很影响用户体验，于是就加入了裁切和压缩图片的功能，我们运用的是vue的插件：vue-core-image-upload
+
+首先安装：
+<pre>npm install vue-core-image-upload --save</pre>
+然后编辑代码：
+<pre>
+    <vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
+
+  <script>
+import VueCoreImageUpload from 'core/vue-core-image-upload.vue'
+
+export default {
+  components: {
+    'vue-core-image-upload': VueCoreImageUpload,
+  },
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    imageuploading() {
+
+    }
+    imagechanged(){
+
+    }
+  }
+};
+</script>
+
+</pre>
+
+<p>好了，到此本以为事情圆满解决了，却又发现了另外的问题，上传到阿里云是用formData的方式上传的，图片裁切过后得到的是Base64格式的图片，这时就需要把Base64格式的图片转成Blob格式，再使用formData方式上传</p>
+<p>Base64格式转换为Blob：</p>
+<pre>
+    function getBlobBydataURI(dataURI,type) {  
+        var binary = atob(dataURI.split(',')[1]);  
+        var array = [];  
+        for(var i = 0; i < binary.length; i++) {  
+            array.push(binary.charCodeAt(i));  
+        }
+
+        return new Blob([new Uint8Array(array)], {type:type });  
+    } 
+</pre>
+最后的上传代码是这样的：
+<pre>
+<vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
+<script>
+import utils from "@/js/utils";
+import axios from "axios";
+import VueCoreImageUpload from "vue-core-image-upload";
+export default {
+  name: "",
+  components: {
+    "vue-core-image-upload": VueCoreImageUpload
+  },
+  data() {
+    return {
+      imgUrl:""
+      local: "local",
+      isXhr: false,
+      file: "",
+      data: "",
+      isShowLoading: false
+    };
+  },
+  methods: {
+    imagechanged(data) {
+      this.file = data;
+      this.getOssToken();
+    },
+    imageuploading(data) {
+      this.isShowLoading = true;
+    },
+    uploadImg() {
+      let data = this.data;
+      const key = data.dir + new Date().getTime() + ".png";//因为Base64格式的图片没有后缀，我们给默认png格式的图片
+      var $Blob = utils.getBlobBydataURI(this.file, "image/png");
+      var request = new FormData()
+      request.append("OSSAccessKeyId", data.accessid); //Bucket 拥有者的Access Key Id。
+      request.append("policy", data.policy); //policy规定了请求的表单域的合法性
+      request.append("Signature", data.signature); //根据Access Key Secret和policy计算的签名信息，OSS验证该签名信息从而验证该Post请求的合法性
+      request.append("key", key); //文件名字，可设置路径
+      request.append("success_action_status", "200"); // 让服务端返回200,不然，默认会返回204
+      request.append("file", $Blob);
+
+      axios({
+        url: data.host,
+        data: request,
+        method: "post",
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(res => {
+          return res.data;
+        })
+        .then(rst => {
+          this.imgUrl = data.host + "/" + key;
+          this.isShowLoading = false;
+        });
+    },
+
+    getOssToken() {//获取阿里云签名
+      this.$api.getOssToken().then(res => {
+        this.data = res;
+        this.uploadImg();
+      });
+    }
+  },
+
+
+};
+</script>
+</pre>
+
+
+<p>上传文件参考博客：<a href="https://gilea.cn/article/11399260-9be2-11e8-b2a2-b1037d08a2a6" target="_blank" rel="noopener">https://gilea.cn/article/11399260-9be2-11e8-b2a2-b1037d08a2a6</a></p>
+<p>vue上传裁切压缩图片插件文档：<a href="https://vanthink-ued.github.io/vue-core-image-upload/index.html#/cn/home" target="_blank" rel="noopener">https://vanthink-ued.github.io/vue-core-image-upload/index.html#/cn/home</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/18/阿里云上传图片（服务器签名后直传）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-微信小程序图片、音频上传七牛云" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
