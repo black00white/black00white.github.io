@@ -207,7 +207,8 @@ uploadImg() {
 <pre>
     <vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
 
-  <script>
+js部分：
+
 import VueCoreImageUpload from 'core/vue-core-image-upload.vue'
 
 export default {
@@ -228,7 +229,7 @@ export default {
     }
   }
 };
-</script>
+
 
 </pre>
 
@@ -248,7 +249,9 @@ export default {
 最后的上传代码是这样的：
 <pre>
 <vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
-<script>
+
+js部分：
+
 import utils from "@/js/utils";
 import axios from "axios";
 import VueCoreImageUpload from "vue-core-image-upload";
@@ -312,7 +315,7 @@ export default {
 
 
 };
-</script>
+
 </pre>
 
 
