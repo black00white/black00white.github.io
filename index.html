@@ -205,10 +205,11 @@ uploadImg() {
 <pre>npm install vue-core-image-upload --save</pre>
 然后编辑代码：
 <pre>
-    <vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
+    <\vue-core-image-upload 无需前边的’\‘ :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。>\<\ vue-core-image-upload>//无需“\”
 
+</\></\vue-core-image-upload></pre>
 js部分：
-
+<pre>
 import VueCoreImageUpload from 'core/vue-core-image-upload.vue'
 
 export default {
@@ -229,9 +230,8 @@ export default {
     }
   }
 };
-
-
 </pre>
+
 
 <p>好了，到此本以为事情圆满解决了，却又发现了另外的问题，上传到阿里云是用formData的方式上传的，图片裁切过后得到的是Base64格式的图片，这时就需要把Base64格式的图片转成Blob格式，再使用formData方式上传</p>
 <p>Base64格式转换为Blob：</p>
@@ -246,12 +246,8 @@ export default {
         return new Blob([new Uint8Array(array)], {type:type });  
     } 
 </pre>
-最后的上传代码是这样的：
+最后的上传代码js部分：(html部分如上)
 <pre>
-<vue-core-image-upload :class="['btn', 'btn-primary']" :crop="local" 图片本地裁切，服务器端裁切为“server” cropratio="1:1" 图片裁切比例 inputaccept="image/*" 接收的文件类型 :max-file-size="5242880" 图片的大小 :compress="60" 压缩比例，数字越小，压缩的越模糊 :isxhr="isXhr" 不使用插件自带的上传，自定义上传图片 @imagechanged="imagechanged" 当input框改变选择图片时候触发，会返回input的获取的图片数据 @imageuploading="imageuploading" 当图片上传过程中触发，你可以自定义你需要处理的内容比如显示加载动画等。></vue-core-image-upload>
-
-js部分：
-
 import utils from "@/js/utils";
 import axios from "axios";
 import VueCoreImageUpload from "vue-core-image-upload";
@@ -315,7 +311,6 @@ export default {
 
 
 };
-
 </pre>
 
 
