@@ -152,6 +152,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vue-配置反向代理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/24/vue-配置反向代理/">vue 配置反向代理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/24/vue-配置反向代理/" class="archive-article-date">
+  	<time datetime="2019-04-24T08:04:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决：</p>
+<p>1、CROS(跨域资源共享)  后台更改header<br>header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问<br>header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式 　　<br>这样就可以跨域请求数据了。</p>
+<p>2、使用http-proxy-middleware 代理解决（项目使用vue-cli脚手架搭建）</p>
+<p>打开config里的index.js文件</p>
+<p>然后更改dev里的内容</p>
+<pre>
+proxyTable: {
+    '/api': {
+      target: 'http://www.qdd.com ',//后台提供的接口地址
+      changeOrigin: true,
+    }
+}
+</pre>
+
+
+<p>顺便说一下可以让在局域网内的所有电脑打开你的程序的方式，还是打开config里边的index.js文件，在dev里更改host为0.0.0.0</p>
+<pre>
+host: '0.0.0.0',
+</pre>
+
+<p>如有错误或其他问题可以直接邮件联系<a href="libeibei0804@outlook.com">libeibei0804@outlook.com</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/24/vue-配置反向代理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-阿里云上传图片（服务器签名后直传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
