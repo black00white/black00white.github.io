@@ -80,5 +80,5 @@ theme: next
 
 deploy:
   type: git
-  repository: git@github.com:black00white/black00white.github.io.git
+  repository: https://github.com/black00white/black00white.github.io.git
   branch: master
