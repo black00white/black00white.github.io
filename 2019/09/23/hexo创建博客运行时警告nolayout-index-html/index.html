@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="今天在一台新的电脑上拉代码来写博客，拉下来代码，一切安装就绪后，执行hexo s命令发现出现了警告：  于是查询了一些网站，发现是原来用的next主题，现在拉下的代码里没有这个主题，只有原始默认的主题，解决办法就是下载next主题就好了：  git clone https://github.com/iissnan/hexo-theme-next themes/next   下载完主题之后重新启动就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;hexo创建博客运行时警告nolayout:index.html&#39;">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/hexo创建博客运行时警告nolayout-index-html/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="今天在一台新的电脑上拉代码来写博客，拉下来代码，一切安装就绪后，执行hexo s命令发现出现了警告：  于是查询了一些网站，发现是原来用的next主题，现在拉下的代码里没有这个主题，只有原始默认的主题，解决办法就是下载next主题就好了：  git clone https://github.com/iissnan/hexo-theme-next themes/next   下载完主题之后重新启动就">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlcAAABKCAYAAACW7HHoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABXPSURBVHhe7Z2/qx3H2cffRqS5hUwQRIUI+A3ESWWCg60iECux7MQIEfxiiA2R5QRBsFzEIIJsKepcqIz0ytiFSnfXxQ0uVEiFQG7S5B/x3zDZ+bX7zDPPzDy7Z0fnnHu/xQfu2Zl55tfunM+d3bv3f3760oumxNtf/cB8dufHYtrEWfPRv39g7n51Vkgj/OUFc/dfZ8x5Kc3xY/P+v/L6zt85KJRj+W38pB2+XR/9xed3cYbPWX9cuw7MZ9W2DfD2k8/TONk6D8z7b/FyUnzf/ti+Uv8tru3Z+Pr+TflZ+bfOmM/+/YJ5OylTgfdvpfaN5V170vPEz0mpjWl9doyl9k3HePta6bZ9L5j37wwM82Xb8tFXwxiM7fP5p/6X+lk+PqZlc28J7SuUG4njxmPMmN9N2lfuPxtPe/4k88vLs/yRUv8Icvsb57+Sv/3w9+Y/P/q5kPZz88+D35ujc9Oxyz/6rfn+hy8n6dNngXO/Mt+f+pX5m/35J6+a/5z6rfnnT2L6y+boFK3bx9O25aTy0s/+dzFSPAB60ZQrt2AS8sXLL3LNL4nCYpvEF2OwfDRPXJgtw+L8Nl+E44IfytlFutT+9qLM2q+Vq2L8vP9pHmF8LMkYhbEX07TzF2H9W6F97ktxTLMik39JpnloHT4+/3w3Gd+0DXnfaukhLX6ph3OJ19eSixh7hPUvy5ek5zGyPlTkoz6/m7bPHy/3f6B6/Sn6RmNk/dO0v37+q6AClNCSqynP94MkRUY5cnHT8lbkvhcEayxfEjUnZlIbTx6SNGmR4gHQi6pcrU62O7ILSEJUYFH7Z8RfE/elxXY23LFKW3ZyfoDIkvkFArUdo92gvLt28pCkSYsUD4BePF+52kHcb/9LfuNV0jt+Ebdrl375+l0i3a0ksONgftcju2W3O7jdsoNXzWUh7SQiSZMWKR4AvTixcjXeUum0U9M7vob8thG+eI8TmN8Vsbfxdk5i7G1D3A6kSNKkRYoHQC9O/M4VAACA/UCSJi1SPAB6AbkCAACwF0jSpEWKB0AvIFcAAAD2AkmatEjxAOhFRa5+Yd75+Ka5efOm+fidXwjpLS6YW4fPzIMPpTQAAABgHpI0aZHiAdCL9s7Vq38wH9+8bt55VUirArkCAACwHpI0aZHiAdALxW1Bv4M1f/cKcgUAAGA9JGnSIsUDoBdqubr58R/ML8X0ElGurpgHz56ZZ4775qqQx6cNPLgypb35qTkcjh3evjAeu/qAx6CxBw4/NRfHNA2s/qx9AAAAdgVJmrRI8QDoRVuu3viTe+7q5uxbg1FcDs2tN6fPmSyNQpWn//TD+1N59zOVH54/1EcFrcHF24ez8gMAANgekjRpkeIB0IumXL3xgb0leGHBrUEvO/S2YCozdteJ7RRZgWK7T77Mp1msXLYG3G6XfvfJxcZuFQAA7AWSNGmR4gHQi7pckYfZf/nO9Zm3BhtyFW77TbfkAtmtvcKOlCBic+XK4m81epJdMwAAADuFJE1apHgA9KIqV06oPgjCMfuvBjVy1RYhKz+Ht6+4WPktQ1ZeOqbGP78FwQIAgN1EkiYtUjwAelGRK/8g+5U3pmP+FqH21mDrtmBhR4pCZcnJWHx+y8JlyMdbLkeblgcAANATSZq0SPEA6EVZrtyD7H8yb2THtILVkqspD70tOMqNE6u0vL+FlwvWWL4mahl53fPKAwAAeJ5I0qRFigdAL5oPtAMAAAC7gCRNWqR4APQCcgUAAGAvkKRJixQPgF5ArgAAAOwFkjRpkeIB0AvIFQAAgL1AkiYtUjwAegG5AgAAsBdI0qRFigdALyBXAAAA9gJJmrRI8QDoBeQKbJnwOo3Z/3QbAHDSkKRJixQPgF5U5OqcuXzvlPnk65Rr18/59NfPmGv22J2zU5l3T5tP7p0xr4TPr1w/KJd3sDpI2XVg78EaoO/Nsvg3wPd7cWjv+PsP5AoAoEOSJi1SPAB6odi58gKUStGAk6sDc+3eaXMhHpPkispXAo8bRKuYfy66N65DrgAAYD+QpEmLFA+AXmwoV6fN5UGgxrQ5csXyOkLMUdY2Ift3OSnubfFsV8tRe4M8212J4kRjxZ0xXfwatm7bfrr7lv7fxFr9HrZzJ+0OhTfhR1IRZP3P2s7fcs//r2M9PRkjMXa9/9LOZPoGfwDAcUKSJi1SPAB6sbFcXXjprHkvStIMuZLThlhfnzLvvUuPLSV+sde/bGs7Sxdv3ydlfTya15alYuBkoSBg8bOevP2uPiIh9fp5e0M8KjFOrMrjk9aX99/VR+MxWukROR/vf15/0j4n0/ltXwDA8UGSJi1SPAB6sYJcvWgu3AlCpHjmKoqTLZPFDHWtI1ce98UddjUkyZkjP1wC3Jc7lSn3BS/vLsXPerxMJLJgZYjUV62f/tNrKV2QlRS7K8TKs/r92LI8hFZ6pCZXtP9pPr9rNaW3+gMA2HckadIixQOgF6vIlfvZ7kKtsnN1YC6/To+tRNjZ4F/iVfmJZShMrlpf5qvLFZGVamwmQo5ErricMKS+W1hMJ3ghTWpLK92yTK58+vjZtRe3BAE4zkjSpEWKB0Av1pErl2eQous79MyVgPtyFuRA/tL38kHTuARoxEmTR6YgV6T91djSzlVyTIhPSURMQz5e2vRlcpWKW03eAADHA0matEjxAOjFSnI1MMjStUGw1HIVnq+a4hbqWQ220xGQhMvDdnbiTs5MuSrHb8HlIpeTev08v49H87u2FQVKHq8yeXxt+iK5mi1/AIB9R5ImLVI8AHpRkSsvO/yZqVF+sl0mL0t6ubKEMjz2GrhdmmlXwyGKQpAIIY+Xj5h239xiEqDblSrHr8PKDfC62vV7warVnfaRx6u1IU9L4y9IT/L49Dk7V5b2fAAA9hVJmrRI8QDohWLnCmyHXC4AQdq5wnNXABxrJGnSIsUDoBeQq50FclVFeKbM78LhViEAxxVJmrRI8QDoBeRqZ4FctchvC0KsADjOSNKkRYoHQC8gVwAAAPYCSZq0SPEA6AXkCgAAwF4gSZMWKR4AvYBcAQAA2AskadIixQOgF5CrrRNel7DoXVj7wHHt3/49E9d6dQdPT17TIbzGozf1+vFM4klEkiYtUryebPv6AdulIlea91wNx+h7rBT/WzB9lxWrg7+xfROabyjfFSBX26T9rrASui/3uULTjdZLVyvp/P1izxu5/ucjV6vMjxtb6RrwfWgJ5PL0nrB36D2n+iVp0iLFS9+HmL/GZY353+j6abSvxXNbXwpsu/5toti5qr2h/cBcu5e+pV3/ElEeN4hW9aWjM9gbuQLbZPnFv19yZRf4Wj21dMjVJvMT2vlgWHuYXNnYU7+8rNC6Nk3vi69vGv8gep3PE0matPBY7rxKhGXow4N8jjYd06XXj6Z9LdZo/yZsu/5tsqFcnTaXB4Ea0+bIVe//LaiSq7AguN8K2MIQftvMFrOkPPvtbebujL94Qlnx4mPtmymG8cSm9fDFkH45pYuATbcXNu0jH7taeqt/7fLZ+DroYtOCjR+Zn6RtFPUiGMdPbn8rfrt+zfhYQnq13TZPbdzq6el5QaFtG5DO/+Q3b77QlueHItdfH39Pq32s/hnzNxHqKIy/i2PrteNA6xdeeDvmXSO9O77fidyy9bW+/ljY+BfmeEwfYv85EabfmNvffGe++y7y/+bDJD0ljS20n0DbnEDa2O4fiVU4P2If0+vCUm9fC03729dHi02vn1r9NrY9v2keaf3bXTaWqwv2X9hESZohV3Ka/3c4771Ljy1EIVdOlsbJFk5ylz8sYFk8nj+caMWLqEzp4qtflG28DE5tcvHGE9i3l168aX2hP+MCXuhvMX1C7ke7fDI/QXbnLDYXb98PsS1y++ICSY/p0PW/Fb+czuOz8RgJi092fKJ1Hi1L5/0N7aX56PUzlpvQzI/Pt+T8abev1W9L+/yojD8VIDsW9MtD+ky/QDZN747vd3I9ujaw9ZWMjRtv0ub0fM7nX5ofKktv/uMb890XHyTHatA4vK0lavPf6l+kfp7l/XYo29ei3P729dFis+unVX/43Fz/dpcV5OpFc+FOECLFM1dRnGyZLGaoaz25spPDiSesXRzYyWvLsIvDn0CfuomuLSQOt5jOvyBKJ6k7vsEF5k5G2p+kff7kbcnV8vTW8VZ5vnj7/PKFqkNqR/nib6Hrfyt+a/Gh8aXzs40QZ1Z6Yf6a5//8+ZLPk9Lxxvgrrk+Xn+dhLD8/WFk+d/Gza1Ncl+w5z2RsaXqspxv8+vSf6VjZ/id9Tsbf5mdjz8ZImh8qS06uGrtVlLEei62L1y9Qm/96/yZK57WncJ0o29ei2H4pfqH9JTa6fpr1C+sSOz92nVXkyv1sd6FW2bk6MJdfp8cWIk0ePTYuSoxs8vwki18uPO/MkzNSu/jcBRzaVrrIS9QWhuaX08bpreO6+ONnN7YzvzikOWbtqI9RDV3/W/HL6Xl88Zxu0VqQWukD4vw1z3/+5SugmB/LovNHeX22rq/F5wevX/rs6iXtoe3bNL07fn7j2Fn4OFXHTpp7C5szPj9cmD78Yrot+M0/fpOlU5L63fi1x6rWB+25IZ2/7hjt9wiR5xXmsthGG19xfbTg8yOlL6t/pfVvi6wjVy7PIEXX9+iZK+WJ5E+OK26ik5OkFX8G8pcHJ//NsEX94m/JwabprePt8vTCLV28ZfLxktpRH6Mauv634pfT8/ju/OILUoPl9U+I89c8/4X2J+jmp3y8Mf6zr0/5+lp6fthy9NyluDa79Yf9skDnd9P07vjxKs9vY+yU6++Er++bOyWB+sB80RCsJJ6rv95+S60P2nOjdF57/HmcxVG2r0WxjbOvjxYzr59m/eusf9tkJbkaGGTp2iBYarkKz1dNcQv1LEU5eeWTfoDmzxYzfjIVLhIF9YsvMj9+/eJn8Vxf6XjkJ3fazlZ663ij/OzFl8MW/7BY8Xa4OhddsLr+t+KX03l8efGKx6Vxb46hcoylfmnOf1euGF83Pxa5/tb4t9uXIqeX5ydSGX9K9sXg65uO8fo3TVcSx73aRwk2fwKa9ac5biM+f1mu/MPtarkasO1Lz8+hDvbXeLX5r/dvQj5/I+V507SvRbn9c6+PFnL55fX7z831b/H525+KXHnZ4c9MjfKT7TJ5WdLLlSWU4bHXoClXFj+B9LfKcfKCbNDFw5/suWCN5dULhSWvO40hpM+Kr7j444lpGU7Oq8kiwE9uvkjo0pP2W9Tl43inVPvDcPHGsvfNLRbfw9qZpZdot5/mK8cvpbPjA3LfwzkotFtujzY9r9+R5G+f/+kcpH2oz0+rfp9eH/9a+4T4QvuzfFme8vgnZHJlSWPn87tpuoKtyZUln4Mpf55mx3iSJf6XggONh9vz+vkaw3YCHawdZJ7r/RPaz8rTfKU47fa1KLdfc/2WkeenmU9dfx5fHKP9lCsAtoi7aJgcu2NLFph9xC8utS+vOnbhqo1VKx2A3UOSJi1SPLCrbLr+bR/IFdhNhJ1Hv9PBhOvYsv+LCwBrI0mTFike2FUgVwB0I78teFLEygK5AoAjSZMWKR7YVY6xXB0dvbXTSG0GAABwfJGkSYsUD4BeQK4AAADsBZI0aZHiAdALyBUAAIC9QJImLVI8AHoBudqA5E/JZ/0Z63Hikvnr/31pPr901ZwX0/X87uKX5u+/Pi+mrc9588dLX5q/vialrcP5X39uPrdjY7l4ScwDANAjSZMWKR4AvSjK1aMnz8zTx1cyqbHHnzwix769a55auXh613xL8h0dXTGPn8YHkQNPbuTl6LFHD4U4MlKbE+L7L6j0iO+a2Zz8/Tq7Q/tdM5tyvOVqjTY5yYJcAbAxkjRpkeIB0IuqXCXiE+By9e3jo0HCbgwidWQef0vzerma8t4wTwbZGYXNydVQ9ulD8yiWWV2uDs3hIfkLM8jVTgO5AgDUkKRJixQPgF4U5cpKUy5XXJimz16y6E6XnDeVq4fmMS23ulz5tz6PcpHJFXtD7ELxKsuV/3NSMb7wHqf8WK19+Z+q0nYktywpWTtDHQvksH7by8rL5+aPL4edLccN87ssT0zzpCLD0mkdL181f2f5rQjldZSIciW3L+kbJbbhtRvDz1dD+4Z+vubbI+3gQa4AWAdJmrRI8QDohUqupt0qK0hkhyoIktt5ysSIyVW4DZh+tmVvmCexXAe5umrlIUpJIldeTqZdnSBCCySjJFcXbw9yN74Bm9fnpYbKkXuv0xin1T7/uSRXkfbO1XK5isjyEMXICtb0OZMhUo7vEqXpeXknODG++1krVpZ2+yzFnStXn9/5mqTOilqMNwG5AmAdJGnSIsUDoBflB9pH0fG387xopXKV7m7ZfPTWoJeradeE3TYkYjbKWxe58oLhJITKlbRzRMoksRqUd65SeL70s5Uc8u9Imu1bS642pyZX9LZbks/tPKUylIqMFRUmS1Zo2M6Qj+l3kOY9nN5oX6AqV6EtUx7IFQA9kaRJixQPgF605WqQoCfumaqwyxR3qvjO1ICVpOnWIE33Pye3Demul/3ZSlonuXI/W+ngcjXuYgllZlCUKxePCuYAzUfrs+2hac32HXO5Crf9stty2W23sAM1W14gVwDsG5I0aZHiAdCLslxZ4RlE59Hjh27Hye5SPXlE5MrJERMHyyhHTL6sOI1iFstTUTsyj4e6usiVE5FDc+s2kysuUtIxBbJc+dttVGzyfJMgjbtrMa3ZvpMgV2znSsCXueTqEiWoCOQKgH1DkiYtUjwAelGXK/rXfFaOnjyc5EraZQpl/O0/vrPFdq8SuRoY4j0dBKuPXA0MYnI4CNa0G8Tlx8vKEhGpydUoP3EXi+ezwjS063BsV6TVPvbZiVce37Uti03x9eTt17NIrpyITOkubfg8iYxiR8o99xQEzMlYLjbjDlhhx6slV+5YVnYAcgXAc0eSJi1SPAB60ZCr4UvX3q5zQhOevQry8yi5BRihAsXlasDtXgX54nLF4k8xZaQ2J3C5ihKRiEY4FpklGF5uxrJCDCc2Y5r/y8W8Di5ReZoU2xGFzTL066oYn7WzUH9+vEWQn3i7LjJKhEJenBxN5Wx6ukuU1zGmh7I0vpWc6QH1wIZylbUhpjflqjU+AIC5SNKkRYoHQC/KciUIzS4htXk/sXJDHmQHAAAgIkmTFikeAL2AXG0Z+0zU/F0jAAA4eUjSpEWKB0AvIFdbwklVuJ1Xfh4KAABARJImLVI8AHpRlCsAAABgl5CkSYsUD4BeQK4AAADsBZI0aZHiAdALyBUAAIC9QJImLVI8AHoBueqGfwVC8mLQPSN5lQQeugcAbBlJmrRI8QDoRUWuzpnL906ZT75OuXb9nE9//Yy5Zo/dOTuVefe0+eTeGfNK+PzK9YNyeQerg5RdjfhyTcf8Vx4sf8P5/stVRH5Jqo7n8YZ4AMDJQJImLVI8APrwovkvocv5br4oXMcAAAAASUVORK5CYII=">
+<meta property="og:updated_time" content="2019-09-23T05:45:10.215Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&#39;hexo创建博客运行时警告nolayout:index.html&#39;">
+<meta name="twitter:description" content="今天在一台新的电脑上拉代码来写博客，拉下来代码，一切安装就绪后，执行hexo s命令发现出现了警告：  于是查询了一些网站，发现是原来用的next主题，现在拉下的代码里没有这个主题，只有原始默认的主题，解决办法就是下载next主题就好了：  git clone https://github.com/iissnan/hexo-theme-next themes/next   下载完主题之后重新启动就">
+<meta name="twitter:image" content="data:image/png;base64,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">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/hexo创建博客运行时警告nolayout-index-html/">
+
+
+
+
+
+  <title>'hexo创建博客运行时警告nolayout:index.html' | blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/hexo创建博客运行时警告nolayout-index-html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">'hexo创建博客运行时警告nolayout:index.html'</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-23T11:42:53+08:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天在一台新的电脑上拉代码来写博客，拉下来代码，一切安装就绪后，执行hexo s命令发现出现了警告：</p>
+<p><img src="data:image/png;base64,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" alt="alt"></p>
+<p>于是查询了一些网站，发现是原来用的next主题，现在拉下的代码里没有这个主题，只有原始默认的主题，解决办法就是下载next主题就好了：</p>
+<pre>
+git clone https://github.com/iissnan/hexo-theme-next themes/next
+</pre>
+
+<p>下载完主题之后重新启动就正常啦</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/23/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">初夏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">初夏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

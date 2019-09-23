@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决： 1、CROS(跨域资源共享) 后台更改header header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式　　这样就可以跨域请求数据了。">
+<meta name="description" content="gitbash拉取代码的时候输错了账号密码，以为重新打开gitbash就会再次弹出输入账号密码的弹窗，结果并没有，于是只能去清除电脑的凭据： 1、快捷键win+r，然后输入control打开控制面板 2、点击打开用户账户 3、点击凭据管理器 4、点击windows凭据找到git凭据删除即可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue 配置反向代理">
-<meta property="og:url" content="http://yoursite.com/2019/05/23/vue-配置反向代理/index.html">
+<meta property="og:title" content="Git Bash输错账号密码后，如何重置重新输入">
+<meta property="og:url" content="http://yoursite.com/2019/08/28/Git-Bash输错账号密码后，如何重置重新输入/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决： 1、CROS(跨域资源共享) 后台更改header header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式　　这样就可以跨域请求数据了。">
+<meta property="og:description" content="gitbash拉取代码的时候输错了账号密码，以为重新打开gitbash就会再次弹出输入账号密码的弹窗，结果并没有，于是只能去清除电脑的凭据： 1、快捷键win+r，然后输入control打开控制面板 2、点击打开用户账户 3、点击凭据管理器 4、点击windows凭据找到git凭据删除即可">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-23T03:04:46.940Z">
+<meta property="og:updated_time" content="2019-09-23T03:04:46.939Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue 配置反向代理">
-<meta name="twitter:description" content="vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决： 1、CROS(跨域资源共享) 后台更改header header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式　　这样就可以跨域请求数据了。">
+<meta name="twitter:title" content="Git Bash输错账号密码后，如何重置重新输入">
+<meta name="twitter:description" content="gitbash拉取代码的时候输错了账号密码，以为重新打开gitbash就会再次弹出输入账号密码的弹窗，结果并没有，于是只能去清除电脑的凭据： 1、快捷键win+r，然后输入control打开控制面板 2、点击打开用户账户 3、点击凭据管理器 4、点击windows凭据找到git凭据删除即可">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/23/vue-配置反向代理/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/28/Git-Bash输错账号密码后，如何重置重新输入/">
 
 
 
 
 
-  <title>vue 配置反向代理 | blog</title>
+  <title>Git Bash输错账号密码后，如何重置重新输入 | blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/vue-配置反向代理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/Git-Bash输错账号密码后，如何重置重新输入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="初夏">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue 配置反向代理</h1>
+          <h1 class="post-title" itemprop="name headline">Git Bash输错账号密码后，如何重置重新输入</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-23T22:28:32+08:00">
-                2019-05-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-28T21:25:14+08:00">
+                2019-08-28
               </time>
             
 
@@ -299,14 +299,11 @@
       
 
       
-        <p>vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决：</p>
-<p>1、CROS(跨域资源共享) 后台更改header</p>
-<p><pre><br>header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问<br>header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式<br></pre>　　<br>这样就可以跨域请求数据了。</p>
-<p>2、使用http-proxy-middleware 代理解决（项目使用vue-cli脚手架搭建）</p>
-<p>打开config里的index.js文件</p>
-<p>然后更改dev里的内容</p>
-<p><pre><br>proxyTable: {<br>    ‘/api’: {<br>      target: ‘<a href="http://www.qdd.com" target="_blank" rel="noopener">http://www.qdd.com</a> ‘,//后台提供的接口地址<br>      changeOrigin: true,<br>    }<br>}<br></pre><br>顺便说一下可以让在局域网内的所有电脑打开你的程序的方式，还是打开config里边的index.js文件，在dev里更改host为0.0.0.0</p>
-<p><pre><br>host: ‘0.0.0.0’,<br></pre><br>如有错误或其他问题可以直接邮件联系<a href="mailto:libeibei0804@outlook.com" target="_blank" rel="noopener">libeibei0804@outlook.com</a></p>
+        <p>gitbash拉取代码的时候输错了账号密码，以为重新打开gitbash就会再次弹出输入账号密码的弹窗，结果并没有，于是只能去清除电脑的凭据：</p>
+<p>1、快捷键win+r，然后输入control打开控制面板</p>
+<p>2、点击打开用户账户</p>
+<p>3、点击凭据管理器</p>
+<p>4、点击windows凭据找到git凭据删除即可</p>
 
       
     </div>
@@ -331,8 +328,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/23/阿里云上传图片（服务器签名后直传）/" rel="next" title="阿里云上传图片（服务器签名后直传）">
-                <i class="fa fa-chevron-left"></i> 阿里云上传图片（服务器签名后直传）
+              <a href="/2019/05/23/vue-配置反向代理/" rel="next" title="vue 配置反向代理">
+                <i class="fa fa-chevron-left"></i> vue 配置反向代理
               </a>
             
           </div>
@@ -341,8 +338,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/28/Git-Bash输错账号密码后，如何重置重新输入/" rel="prev" title="Git Bash输错账号密码后，如何重置重新输入">
-                Git Bash输错账号密码后，如何重置重新输入 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/23/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
