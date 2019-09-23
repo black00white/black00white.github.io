@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="目前的项目是vue+element ui搭建的，其中需要用到el-tabs来做标签页来回切换，以显示不同的内容，后台调的都是同一个接口，只是传的参数不同，但是用过el-tabs的童鞋都知道，这个控件是直接将全部的内容都加载出来的，既浪费服务器资源，又不能满足实际业务场景需求，于是在写了过程中做了些优化： 首先是html代码 通过给每个组件添加条件判断来控制组件的显示，默认显示第一个，其余的全部设置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/05/23/hello-world/index.html">
+<meta property="og:title" content="el-tabs异步按需加载el-tab-pane的内容">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/el-tabs异步按需加载el-tab-pane的内容/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="目前的项目是vue+element ui搭建的，其中需要用到el-tabs来做标签页来回切换，以显示不同的内容，后台调的都是同一个接口，只是传的参数不同，但是用过el-tabs的童鞋都知道，这个控件是直接将全部的内容都加载出来的，既浪费服务器资源，又不能满足实际业务场景需求，于是在写了过程中做了些优化： 首先是html代码 通过给每个组件添加条件判断来控制组件的显示，默认显示第一个，其余的全部设置">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T13:01:52.938Z">
+<meta property="og:updated_time" content="2019-09-23T06:55:47.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="el-tabs异步按需加载el-tab-pane的内容">
+<meta name="twitter:description" content="目前的项目是vue+element ui搭建的，其中需要用到el-tabs来做标签页来回切换，以显示不同的内容，后台调的都是同一个接口，只是传的参数不同，但是用过el-tabs的童鞋都知道，这个控件是直接将全部的内容都加载出来的，既浪费服务器资源，又不能满足实际业务场景需求，于是在写了过程中做了些优化： 首先是html代码 通过给每个组件添加条件判断来控制组件的显示，默认显示第一个，其余的全部设置">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/23/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/el-tabs异步按需加载el-tab-pane的内容/">
 
 
 
 
 
-  <title>Hello World | blog</title>
+  <title>el-tabs异步按需加载el-tab-pane的内容 | blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/el-tabs异步按需加载el-tab-pane的内容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="初夏">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">el-tabs异步按需加载el-tab-pane的内容</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-23T21:01:52+08:00">
-                2019-05-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-23T14:19:43+08:00">
+                2019-09-23
               </time>
             
 
@@ -299,15 +299,13 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>目前的项目是vue+element ui搭建的，其中需要用到el-tabs来做标签页来回切换，以显示不同的内容，后台调的都是同一个接口，只是传的参数不同，但是用过el-tabs的童鞋都知道，这个控件是直接将全部的内容都加载出来的，既浪费服务器资源，又不能满足实际业务场景需求，于是在写了过程中做了些优化：</p>
+<p>首先是html代码</p>
+<p>通过给每个组件添加条件判断来控制组件的显示，默认显示第一个，其余的全部设置为false<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeName&quot; @tab-click=&quot;handleClick&quot;&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;全部&quot; name=&quot;first&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.first&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;待接单&quot; name=&quot;second&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.second&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;待上门&quot; name=&quot;third&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.third&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">  &lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure></p>
+<p>js代码段：</p>
+<p>点击时通过点击事件控制让点击的tab的判断条件变为true，从而让改tab显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    components: &#123;orderTable&#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            activeName:&apos;first&apos;,</span><br><span class="line">            load:&#123;</span><br><span class="line">                first:true,</span><br><span class="line">                second:false,</span><br><span class="line">                third:false,</span><br><span class="line">            &#125;,</span><br><span class="line">            status:&apos;&apos;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        handleClick(tab,event)&#123;</span><br><span class="line">            if (this.load[tab.name] === false)&#123;</span><br><span class="line">                this.load[tab.name] = true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再用watch监测一下activeName,通过activeName值的变化来改变参数中status的值，传给后台从而获得不同的数据展示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    activeName(newVal, oldVal)&#123;</span><br><span class="line">        switch (newVal) &#123;</span><br><span class="line">            case &apos;first&apos;:this.status = null</span><br><span class="line">            break;</span><br><span class="line">            case &apos;second&apos;:this.status = &apos;1&apos;</span><br><span class="line">            break;</span><br><span class="line">            case &apos;third&apos;:this.status = &apos;2&apos;</span><br><span class="line">            break;</span><br><span class="line">            default:this.status = null</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>至此大功告成，如有不对之处欢迎之处，联系邮箱：<a href="libeibei0804@outlook.com">libeibei0804@outlook.com</a></p>
 
       
     </div>
@@ -332,15 +330,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/09/23/hexo创建博客运行时警告nolayout-index-html/" rel="next" title="hexo创建博客运行时警告nolayout:index.html">
+                <i class="fa fa-chevron-left"></i> hexo创建博客运行时警告nolayout:index.html
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/23/下拉刷新-上滑加载-vuev插件vue-scroller/" rel="prev" title="下拉刷新 上滑加载 vue插件vue-scroller">
-                下拉刷新 上滑加载 vue插件vue-scroller <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -392,17 +390,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -417,7 +406,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -444,22 +433,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
