@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近打算自己手撸个后台管理项目练练手，封装好了axios请求，一直没有后台的支持，不知道哪里有问题也没敢放上来，今天简单的启了个express的接口，调通后特来记录下axios的封装过程，其中参考了axios中文文档和掘金上的这篇文章 安装axios  1npm install axios --save 项目目录是这样的，在src目录下创建一个专门用来放网络请求的文件夹request，然后在文件夹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue项目中网络请求axios的封装">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/vue项目中网络请求axios的封装/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="最近打算自己手撸个后台管理项目练练手，封装好了axios请求，一直没有后台的支持，不知道哪里有问题也没敢放上来，今天简单的启了个express的接口，调通后特来记录下axios的封装过程，其中参考了axios中文文档和掘金上的这篇文章 安装axios  1npm install axios --save 项目目录是这样的，在src目录下创建一个专门用来放网络请求的文件夹request，然后在文件夹">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="data:image/png;base64,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">
+<meta property="og:updated_time" content="2019-10-23T09:42:32.245Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue项目中网络请求axios的封装">
+<meta name="twitter:description" content="最近打算自己手撸个后台管理项目练练手，封装好了axios请求，一直没有后台的支持，不知道哪里有问题也没敢放上来，今天简单的启了个express的接口，调通后特来记录下axios的封装过程，其中参考了axios中文文档和掘金上的这篇文章 安装axios  1npm install axios --save 项目目录是这样的，在src目录下创建一个专门用来放网络请求的文件夹request，然后在文件夹">
+<meta name="twitter:image" content="data:image/png;base64,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">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/23/vue项目中网络请求axios的封装/">
+
+
+
+
+
+  <title>vue项目中网络请求axios的封装 | blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/vue项目中网络请求axios的封装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue项目中网络请求axios的封装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-23T16:57:36+08:00">
+                2019-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近打算自己手撸个后台管理项目练练手，封装好了axios请求，一直没有后台的支持，不知道哪里有问题也没敢放上来，今天简单的启了个express的接口，调通后特来记录下axios的封装过程，其中参考了<a href="http://www.axios-js.com/zh-cn/docs/" target="_blank" rel="noopener">axios中文文档</a>和掘金上的<a href="https://juejin.im/post/5b55c118f265da0f6f1aa354" target="_blank" rel="noopener">这篇文章</a></p>
+<font color="#409EFF" face="微软雅黑">安装axios</font>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install axios --save</span><br></pre></td></tr></table></figure>
+<p>项目目录是这样的，在src目录下创建一个专门用来放网络请求的文件夹request，然后在文件夹下创建一个axios.js文件和api文件夹，axios的基本配置写在axios.js里，业务逻辑的接口代码放在api文件夹中,方便统一管理。<br><img src="data:image/png;base64,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" alt="alt"></p>
+<p>在axios.js中引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import axios from &apos;axios&apos;</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF">axios.js中的基本配置</font>
+
+<p>弹出的提示，因为我全局用了element-ui所以弹窗直接用的是里边的组件，大家可以选择自己所用的UI框架的弹窗。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">//创建实例</span><br><span class="line">var instance = axios.create(&#123;</span><br><span class="line">    timeout: 1000 * 10 //设置请求超时</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//设置post请求时添加请求头</span><br><span class="line">instance.defaults.headers.post[&apos;Content-Type&apos;] = &apos;application/x-www-form-urlencoded&apos;</span><br><span class="line"></span><br><span class="line">//跳转登录，携带当前页面参数，登陆成功后跳转当前页</span><br><span class="line">const toLogin = () =&gt; &#123;</span><br><span class="line">    router.replace(&#123;</span><br><span class="line">        path: &apos;/login&apos;,</span><br><span class="line">        query: &#123;</span><br><span class="line">            redirect: router.currentRoute.fullPath</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//请求拦截</span><br><span class="line">instance.interceptors.request.use(</span><br><span class="line">    //发送请求前所做</span><br><span class="line">    config =&gt; &#123;</span><br><span class="line">        return config</span><br><span class="line">    &#125;,</span><br><span class="line">    //请求失败</span><br><span class="line">    error =&gt; &#123;</span><br><span class="line">        return Promise.reject(error)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">//响应拦截</span><br><span class="line">instance.interceptors.response.use(</span><br><span class="line">    response =&gt; &#123;</span><br><span class="line">        //返回200请求成功，否则抛出异常</span><br><span class="line">        if(response.status === 200) &#123;</span><br><span class="line">            return Promise.resolve(response)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return Promise.reject(response)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //错误处理</span><br><span class="line">    error =&gt; &#123;</span><br><span class="line">        if(error.response.status)&#123;</span><br><span class="line">            switch(error.response.status)&#123;</span><br><span class="line">                //401未登录，跳转登录页并记录下当前页面路径，登陆成功后跳转回该页</span><br><span class="line">                case 401:</span><br><span class="line">                    router.replace(&#123;</span><br><span class="line">                        path: &apos;/login&apos;,</span><br><span class="line">                        query: &#123;</span><br><span class="line">                            redirect: router.currentRoute.fullPath</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">                    break;</span><br><span class="line">                //403登录失效，清除登录信息并重新登录</span><br><span class="line">                case 403:</span><br><span class="line">                    //清除登录信息</span><br><span class="line">                    //重新登录</span><br><span class="line">                    setTimeout(() =&gt; &#123;</span><br><span class="line">                        toLogin</span><br><span class="line">                    &#125;, 1000);</span><br><span class="line">                    break;</span><br><span class="line">                //404找不到页面</span><br><span class="line">                case 404:</span><br><span class="line">                    this.$message(&#123;</span><br><span class="line">                        message:&quot;未找到页面&quot;,</span><br><span class="line">                        type: &quot;info&quot;</span><br><span class="line">                    &#125;)</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    this.$message(&#123;</span><br><span class="line">                        message: error.response.data.msg,</span><br><span class="line">                        type: &quot;error&quot;</span><br><span class="line">                    &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            return Promise.reject(error.response)</span><br><span class="line">        &#125;</span><br><span class="line">        return Promise.reject(error)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">export default instance</span><br></pre></td></tr></table></figure>
+<font color="#409EFF">base.js</font>
+
+<p>用来管理baseUrl，在多人合作的时候也能很方便。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const baseUrl = &#123;</span><br><span class="line">    base:&apos;http://localhost:3000&apos;,</span><br><span class="line">    baseTwo:&apos;http://localhost:4000&apos;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default baseUrl</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF">index.js</font>
+
+<p>所有的需要导出的接口都写在api文件夹的index.js文件中统一管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import loginModel from &apos;./login.js&apos;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    loginModel</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF">login.js</font>
+
+<p>真正的业务代码可以分模块放在不同的文件中，例如login模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import axios from &apos;./../axios&apos;</span><br><span class="line">import baseUrl from &apos;./base&apos;</span><br><span class="line">import qs from &apos;qs&apos;</span><br><span class="line"></span><br><span class="line">const loginModel = &#123;</span><br><span class="line">    login(params)&#123;</span><br><span class="line">        return axios.post(`$&#123;baseUrl.base&#125;/login`,qs.stringify(params))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default loginModel</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF">main.js</font>
+
+<p>最后还需要把axios挂载在vue原型上，这样就可以直接用this来调用了，在main.js文件夹中添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//挂载axios</span><br><span class="line">import axios from &apos;./request/api/index.js&apos;</span><br><span class="line">Vue.prototype.$axios = axios</span><br></pre></td></tr></table></figure></p>
+<p>调用接口的时候直接用this.$axios对应的名字就能获取数据了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">login()&#123;</span><br><span class="line">  this.$axios.loginModel.login().then(res =&gt;&#123;</span><br><span class="line">    console.log(res)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/23/基于node环境的express的入门搭建/" rel="next" title="基于node环境的express的入门搭建">
+                <i class="fa fa-chevron-left"></i> 基于node环境的express的入门搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">初夏</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">初夏</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
