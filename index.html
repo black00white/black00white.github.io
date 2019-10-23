@@ -229,6 +229,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/基于node环境的express的入门搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/23/基于node环境的express的入门搭建/" itemprop="url">基于node环境的express的入门搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-23T11:34:43+08:00">
+                2019-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近打算自己搭建一个简单的后台，来为自己的前端代码提供基础的接口，学过一些node.js的基础，首先就想到了基于node的express框架，记录下首次搭建的过程。</p>
+<p>首先确认电脑上安装了node环境，在命令行工具敲node -v，如果显示除了版本号，则已经安装了node环境。如果没有安装，点击下载链接 <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a>，选择和你电脑系统相匹配的版本下载即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">v10.16.0</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF" face="微软雅黑">安装express</font>
+
+<p>新建一个文件夹，然后在文件夹内执行npm init为应用程序创建 package.json文件，全部回车默认执行即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure></p>
+<p>然后安装express,并将其保存在依赖项列表中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express --save</span><br></pre></td></tr></table></figure></p>
+<font color="#409EFF" face="微软雅黑">初始化express服务</font>
+
+<p>创建一个名为server的文件夹，在里边创建一个app.js，在里边添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">var app = express()</span><br><span class="line"></span><br><span class="line">app.get(&apos;/&apos;,function(req,res)&#123;</span><br><span class="line">    res.send(&apos;hello world&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(3000, function()&#123;</span><br><span class="line">    console.log(&apos;hello&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>使用以下命令运行程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure></p>
+<p>然后在浏览器输入<a href="http://localhost:3000/就可以看到刚启动的服务了。" target="_blank" rel="noopener">http://localhost:3000/就可以看到刚启动的服务了。</a></p>
+<p>附express中文网链接<a href="https://expressjs.com/zh-cn/starter/installing.html" target="_blank" rel="noopener">https://expressjs.com/zh-cn/starter/installing.html</a>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/解决vue打包后的文件放在服务器上，浏览器有缓存的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1364,133 +1495,6 @@ git clone https://github.com/iissnan/hexo-theme-next themes/next
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/vue-配置反向代理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="初夏">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/23/vue-配置反向代理/" itemprop="url">vue 配置反向代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-23T22:28:32+08:00">
-                2019-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决：</p>
-<p>1、CROS(跨域资源共享) 后台更改header</p>
-<p><pre><br>header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问<br>header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式<br></pre>　　<br>这样就可以跨域请求数据了。</p>
-<p>2、使用http-proxy-middleware 代理解决（项目使用vue-cli脚手架搭建）</p>
-<p>打开config里的index.js文件</p>
-<p>然后更改dev里的内容</p>
-<p><pre><br>proxyTable: {<br>    ‘/api’: {<br>      target: ‘<a href="http://www.qdd.com" target="_blank" rel="noopener">http://www.qdd.com</a> ‘,//后台提供的接口地址<br>      changeOrigin: true,<br>    }<br>}<br></pre><br>顺便说一下可以让在局域网内的所有电脑打开你的程序的方式，还是打开config里边的index.js文件，在dev里更改host为0.0.0.0</p>
-<p><pre><br>host: ‘0.0.0.0’,<br></pre><br>如有错误或其他问题可以直接邮件联系<a href="mailto:libeibei0804@outlook.com" target="_blank" rel="noopener">libeibei0804@outlook.com</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1541,7 +1545,7 @@ git clone https://github.com/iissnan/hexo-theme-next themes/next
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
