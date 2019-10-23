@@ -229,6 +229,133 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/vue-配置反向代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/23/vue-配置反向代理/" itemprop="url">vue 配置反向代理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-23T22:28:32+08:00">
+                2019-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vue项目中，前端调用后台接口是会遇到跨域问题，可以用jsonp或者CROS（跨域资源共享）的方式解决：</p>
+<p>1、CROS(跨域资源共享) 后台更改header</p>
+<p><pre><br>header(‘Access-Control-Allow-Origin:*’);//允许所有来源访问<br>header(‘Access-Control-Allow-Method:POST,GET’);//允许访问的方式<br></pre>　　<br>这样就可以跨域请求数据了。</p>
+<p>2、使用http-proxy-middleware 代理解决（项目使用vue-cli脚手架搭建）</p>
+<p>打开config里的index.js文件</p>
+<p>然后更改dev里的内容</p>
+<p><pre><br>proxyTable: {<br>    ‘/api’: {<br>      target: ‘<a href="http://www.qdd.com" target="_blank" rel="noopener">http://www.qdd.com</a> ‘,//后台提供的接口地址<br>      changeOrigin: true,<br>    }<br>}<br></pre><br>顺便说一下可以让在局域网内的所有电脑打开你的程序的方式，还是打开config里边的index.js文件，在dev里更改host为0.0.0.0</p>
+<p><pre><br>host: ‘0.0.0.0’,<br></pre><br>如有错误或其他问题可以直接邮件联系<a href="mailto:libeibei0804@outlook.com" target="_blank" rel="noopener">libeibei0804@outlook.com</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/阿里云上传图片（服务器签名后直传）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -761,7 +888,7 @@ recorderManager.onStop((res) =&gt; {//停止录音
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
