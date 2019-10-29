@@ -53,4 +53,13 @@ git push origin <tagname>(v1.0)
 ```
 git push origin --tags
 ```
+
+克隆远程仓库到本地（创建新的文件夹，在空文件夹中执行）
+```
+git clone <cloneUrl>(https://github.com/)
+```
+拉取远程代码
+```
+git pull origin <tagname>
+```
 先想到这么多，以后用到的再慢慢补充。
