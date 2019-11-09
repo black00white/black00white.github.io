@@ -229,6 +229,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/从后台获取的数组，改变数组之后，vue视图不更新的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/09/从后台获取的数组，改变数组之后，vue视图不更新的问题/" itemprop="url">从后台获取的数组，改变数组之后，vue视图不更新的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-09T11:02:25+08:00">
+                2019-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>后台返回的数据是一个数据，然后我把这个数组赋值给了data里边的一个变量，上传图片成功之后改变这个变量中的图片地址，结果在图片上传成功的函数中，打印出来的数据是已经变了的，但是vue的视图就是没变，可把我急坏了。线上代码看最初的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getDataList()&#123;//从后台获取原始数据</span><br><span class="line">    this.adList = info//把获取到的info数据赋值给data里已经存在的变量adList</span><br><span class="line">&#125;,</span><br><span class="line">cardUpload1(val)&#123;</span><br><span class="line">    this.adList[this.uploadTag].image_url = val.info.url//图片上传成功之后，替换原有的图片地址，结果在这里打印出来的adlist是已经变化的，但是html的视图就是不发生变化</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>然后查了一大堆资料才发现，vue对于数组变化的监听，有两种情况是监听不到的：</p>
+<p>① 利用索引直接设置一个项时，vm.items[indexOfItem] = newValue</p>
+<p>② 修改数组的长度时，例如： vm.items.length = newLength</p>
+<p>而我最初的写法刚好就是属于第一种的改变数组的方式，这个时候想要改变数组，同时让视图更新，就需要用到数组的splice方法，该方法可以更改数组原来的值。所以修改后的写法为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cardUpload1(val)&#123;</span><br><span class="line">    var item = this.adList[this.uploadTag]</span><br><span class="line">    item.image_url = val.info.url</span><br><span class="line">    this.adList.splice(this.uploadTag, item)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<!-- 鉴于此，刚好扒一扒js数组的常见方法及返回值（主要涉及改变数组长度的，对比是否会引起视图变化）
+
+
+push()    向数组的末尾添加元素，并返回新的长度。所以用push()改变的数组，vue的视图中也不会发生变化。
+
+concat()    连接两个或更多的数组，并返回结果。 -->
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/29/上月/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1385,132 +1515,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/el-tabs异步按需加载el-tab-pane的内容/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="初夏">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/23/el-tabs异步按需加载el-tab-pane的内容/" itemprop="url">el-tabs异步按需加载el-tab-pane的内容</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-23T14:19:43+08:00">
-                2019-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>目前的项目是vue+element ui搭建的，其中需要用到el-tabs来做标签页来回切换，以显示不同的内容，后台调的都是同一个接口，只是传的参数不同，但是用过el-tabs的童鞋都知道，这个控件是直接将全部的内容都加载出来的，既浪费服务器资源，又不能满足实际业务场景需求，于是在写了过程中做了些优化：</p>
-<p>首先是html代码</p>
-<p>通过给每个组件添加条件判断来控制组件的显示，默认显示第一个，其余的全部设置为false<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeName&quot; @tab-click=&quot;handleClick&quot;&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;全部&quot; name=&quot;first&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.first&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;待接单&quot; name=&quot;second&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.second&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">    &lt;el-tab-pane label=&quot;待上门&quot; name=&quot;third&quot;&gt;</span><br><span class="line">        &lt;orderTable v-if=&quot;load.third&quot;/&gt;</span><br><span class="line">    &lt;/el-tab-pane&gt;</span><br><span class="line">  &lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure></p>
-<p>js代码段：</p>
-<p>点击时通过点击事件控制让点击的tab的判断条件变为true，从而让改tab显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    components: &#123;orderTable&#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            activeName:&apos;first&apos;,</span><br><span class="line">            load:&#123;</span><br><span class="line">                first:true,</span><br><span class="line">                second:false,</span><br><span class="line">                third:false,</span><br><span class="line">            &#125;,</span><br><span class="line">            status:&apos;&apos;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        handleClick(tab,event)&#123;</span><br><span class="line">            if (this.load[tab.name] === false)&#123;</span><br><span class="line">                this.load[tab.name] = true</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>再用watch监测一下activeName,通过activeName值的变化来改变参数中status的值，传给后台从而获得不同的数据展示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    activeName(newVal, oldVal)&#123;</span><br><span class="line">        switch (newVal) &#123;</span><br><span class="line">            case &apos;first&apos;:this.status = null</span><br><span class="line">            break;</span><br><span class="line">            case &apos;second&apos;:this.status = &apos;1&apos;</span><br><span class="line">            break;</span><br><span class="line">            case &apos;third&apos;:this.status = &apos;2&apos;</span><br><span class="line">            break;</span><br><span class="line">            default:this.status = null</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>至此大功告成，如有不对之处欢迎之处，联系邮箱：<a href="libeibei0804@outlook.com">libeibei0804@outlook.com</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1561,7 +1565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
