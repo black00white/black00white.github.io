@@ -229,6 +229,253 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/将网络图片转化为base64格式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/27/将网络图片转化为base64格式/" itemprop="url">将网络图片转化为base64格式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-27T16:50:54+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接上篇文章中说到因为跨域的原因，需要把从后台获取过来的图片链接转换为base64格式，这里就用到了canvas的toDataURL来转换，不多说，上代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">imageToBase64(url,callback)&#123;</span><br><span class="line">    var mycanvas = document.createElement(&quot;canvas&quot;)</span><br><span class="line">    var ctx = mycanvas.getContext(&apos;2d&apos;)</span><br><span class="line">    //此处最好是获取页面已经有的元素，以方便获取宽高，否则可能会出现获取到的宽高为0，canvas画图失败的问题</span><br><span class="line">    var img = document.querySelector(&apos;.share-img&apos;)</span><br><span class="line">    var data = null</span><br><span class="line">    //这里需要设置crossOrigin的值，允许跨域，不然会报错，一定要在设置完之后再给src赋值</span><br><span class="line">    img.setAttribute(&quot;crossOrigin&quot;,&apos;anonymous&apos;)</span><br><span class="line">    img.src = url;</span><br><span class="line">    var w = parseInt(window.getComputedStyle(img).width);</span><br><span class="line">    var h = parseInt(window.getComputedStyle(img).height);</span><br><span class="line">    mycanvas.width = w</span><br><span class="line">    mycanvas.height = h</span><br><span class="line">    img.onload = function()&#123;</span><br><span class="line">        //一定要在img.onload加载完图片之后再去执行drawImage,否则会因为获取不到图片元素而报错，或者图片没有画到canvas画布上</span><br><span class="line">        // 将图片画到canvas上面上去！</span><br><span class="line">        ctx.drawImage(img,0,0,w,h);</span><br><span class="line">        data = mycanvas.toDataURL(&apos;image/jpeg&apos;)</span><br><span class="line">        //这里一定要回调一下，在回调里获取到base64的值，然后赋值给原来的图片的src</span><br><span class="line">        callback.call(this, data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">this.imageToBase64(this.img,function(url)&#123;</span><br><span class="line">    //本来是在这里直接把返回的base64的值赋值给了this.img以期望页面上的图片地址替换为base64格式，奈何怎么赋值都没有实现，使用了vue的深度监听，也没有监听到img值的变化，至今不知道是什么原因没有监听到，所以就用了最原始的方法直接获取DOM元素，然后给元素的src赋值，这样竟然就实现了</span><br><span class="line">    document.querySelector(&apos;.share-img&apos;).setAttribute(&quot;src&quot;,url)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>踩坑点都已经标注在注释里，在此就不一一解释了，仅作记录。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/前端实现页面转换为图片，长按保存相册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/27/前端实现页面转换为图片，长按保存相册/" itemprop="url">前端实现页面转换为图片，长按保存相册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-27T13:39:03+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近更新博客没有那么频繁了，一是公司的项目时间紧，而且在这个项目中遇到了个小问题一直没有解决，昨天刚把问题解决了，特来记录下过程。</p>
+<p>产品需求是这样的，安卓和ios点击分享按钮，有一项是保存图片，本来是说要让app自主开发的，结果他们时间紧任务重，自然就想到了由H5来开发，这样安卓和ios就可以共用一套。分享的商品详情图片上有基本的商品信息、商品图片以及一张h5的二维码。先说下技术选型吧，二维码就交给qrcode.js了，生成图片的功能用的是html2canvas，这个选定了就一点点的踩坑了。</p>
+<p>因为项目是vue脚手架搭建的，首先要安装依赖qrcode和heml2canvas<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install qrcode --save</span><br><span class="line">npm install html2canvas --save</span><br></pre></td></tr></table></figure></p>
+<p>接下来在页面中引用qrcode和html2canvas<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import html2canvas from &apos;html2canvas&apos;;</span><br><span class="line">import QRCode from &apos;qrcodejs2&apos;</span><br></pre></td></tr></table></figure></p>
+<p>页面html的代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=&quot;share&quot; ref=&quot;share&quot;&gt;</span><br><span class="line">    &lt;!--页面显示的内容--&gt;</span><br><span class="line">        &lt;div class=&quot;share-area&quot;&gt;</span><br><span class="line">            &lt;p class=&quot;share-top&quot;&gt;今日待售！&lt;/p&gt;</span><br><span class="line">            &lt;p&gt;&#123;&#123;detail.address&#125;&#125;&lt;/p&gt;</span><br><span class="line">            &lt;p&gt;&#123;&#123;detail.category_type_name&#125;&#125;&#123;&#123;detail.weight&#125;&#125;&lt;/p&gt;</span><br><span class="line">            &lt;img :src=&quot;img&quot; class=&quot;share-img&quot;/&gt;</span><br><span class="line">            &lt;div id=&quot;qrcode&quot;&gt;&lt;/div&gt;</span><br><span class="line">            &lt;p class=&quot;share-img-tip&quot;&gt;扫描二维码查看详情并报价&lt;/p&gt;</span><br><span class="line">            &lt;p @click=&quot;createCanvas&quot; class=&quot;save-img&quot; v-if=&quot;isCanvas&quot;&gt;点击生成图片&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;!--生成截图后展示的部分--&gt;</span><br><span class="line">        &lt;div class=&quot;canvas-mask&quot; v-show=&quot;showImg&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;canvas&quot;&gt;&lt;img class=&quot;img&quot; :src=&quot;qrContentImage&quot; crossOrigin=&quot;anonymous&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;</span><br><span class="line">            &lt;p class=&quot;tip&quot;&gt;长按图片保存至相册&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p>js部分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">        qrContentImage:&apos;&apos;,</span><br><span class="line">        showImg:false,</span><br><span class="line">        isCanvas:true,</span><br><span class="line">        img:&apos;&apos;,</span><br><span class="line">        detail:&#123;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">    getData(id)&#123;</span><br><span class="line">        //这里调用从后台获取商品数据的接口，返回的数据赋值给this.detail</span><br><span class="line">        this.img = this.detail.images       </span><br><span class="line">    &#125;,</span><br><span class="line">    qrcode (text) &#123;   //生成二维码</span><br><span class="line">    	let qrcode = new QRCode(&apos;qrcode&apos;, &#123;  </span><br><span class="line">    		width: 138,  </span><br><span class="line">    		height: 138, // 高度  </span><br><span class="line">    		text: text // 二维码内容  </span><br><span class="line">        &#125;)  </span><br><span class="line">    &#125;,</span><br><span class="line">    createCanvas() &#123;</span><br><span class="line">        this.isCanvas = false</span><br><span class="line">        this.$nextTick(() =&gt; &#123;</span><br><span class="line">            var canvas2 = document.createElemen(&apos;canvas&apos;);</span><br><span class="line">            //此处是一个坑，最好在页面上定义一个元素，然后在此获取这个dom节点，再去获取到宽高，网上搜到很多用直接创建的canvas元素来获取宽高，结果宽高都为0，导致画图不成功的问题</span><br><span class="line">			let tar = document.querySelecto(&apos;.canvas&apos;);</span><br><span class="line">			var w = parseIn(window.getComputedStyle(tar).width);</span><br><span class="line">			var h = parseIn(window.getComputedStyle(tar).height;</span><br><span class="line">			var context = canvas2.getContex(&apos;2d&apos;);</span><br><span class="line">			canvas2.width = w * 2;</span><br><span class="line">			canvas2.height = h * 2;</span><br><span class="line">			canvas2.style.width = w + &apos;rem&apos;;</span><br><span class="line">			canvas2.style.height = h + &apos;rem&apos;;</span><br><span class="line">			context.scale(2, 2);//图片或者文字不清晰可以调整缩放倍数，本项目用到的调整为二倍，保存的图片和文字已经很清晰了</span><br><span class="line">			html2canvas(document.querySelecto(&apos;#share&apos;), &#123;</span><br><span class="line">                useCORS: true,//此处为允许图片跨域，但是也需要你们项目的图片服务器上允许跨域</span><br><span class="line">			&#125;).then(canvas =&gt; &#123;</span><br><span class="line">				this.qrContentImage =canvas.toDataURL(&apos;image/jpg&apos;);</span><br><span class="line">				this.showImg = true</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>这里只介绍了html2canvas将页面生成图片的方法，但是因为是用canvas来实现的画图，所以会涉及到图片跨域的问题，html2canvas官网提供了一些中间件的方法，我没有尝试，我的解决办法是将跨域的图片在执行画图前先转换为base64格式的图片流，这样就不会出现跨域问题了。关于将图片转换为base64格式下一篇博客会记录实现方式。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/对接友盟统计-网站统计之vue单页面嵌入/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1253,267 +1500,6 @@ concat()    连接两个或更多的数组，并返回结果。 -->
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/markdown语法常见应用汇总/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="初夏">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/11/markdown语法常见应用汇总/" itemprop="url">markdown语法常见应用汇总</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-11T13:29:26+08:00">
-                2019-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>换行：按下两次enter键</p>
-<p>文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*斜体*</span><br><span class="line">**加粗**</span><br><span class="line">***斜体并加粗***</span><br><span class="line">&lt;font color=#409EFF face=&quot;微软雅黑&quot; size=2&gt;**关于打标签**&lt;/font&gt;//可设置颜色，字体，大小</span><br></pre></td></tr></table></figure></p>
-<p>超链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[http://www.google.com](http://www.google.com)</span><br></pre></td></tr></table></figure></p>
-<p>引入图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![alt][image]</span><br><span class="line">[image]:图片链接地址</span><br></pre></td></tr></table></figure></p>
-<p>以后用到的再慢慢补充</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/28/git常用命令整理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="初夏">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/28/git常用命令整理/" itemprop="url">git常用命令整理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-28T11:44:08+08:00">
-                2019-09-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>整理下常用到的命令，方便自己用时查询</p>
-<font color="#409EFF" face="微软雅黑"><strong>基础应用</strong></font>
-
-<p>添加修改(*是指添加所有修改，也可以自定义添加)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add *</span><br></pre></td></tr></table></figure></p>
-<p>提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit &quot;添加信息&quot;</span><br></pre></td></tr></table></figure></p>
-<p>提交到远程分支（默认分支是master,若想提交到其他分支，改为其他分支名即可）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin 分支名</span><br></pre></td></tr></table></figure></p>
-<p>切换到其它分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure></p>
-<p>查看提交历史<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure></p>
-<font color="#409EFF" face="微软雅黑"><strong>关于打标签</strong></font>
-
-<p>打轻量级标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br></pre></td></tr></table></figure></p>
-<p>默认标签是打在最新提交的commit上的。有时候，如果忘了打标签，就需要先找到需要打标签的commit，然后再打标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log//查看历史提交，找到需要打标签的commit</span><br><span class="line">git tag v1.0 &lt;commit id&gt;</span><br></pre></td></tr></table></figure></p>
-<p>查看标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
-<p>推送某个标签到远程仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tagname&gt;(v1.0)</span><br></pre></td></tr></table></figure></p>
-<p>推送全部未推送过的标签到远程仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure></p>
-<p>克隆远程仓库到本地（创建新的文件夹，在空文件夹中执行）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;cloneUrl&gt;(https://github.com/)</span><br></pre></td></tr></table></figure></p>
-<p>拉取远程代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin &lt;tagname&gt;</span><br></pre></td></tr></table></figure></p>
-<p>先想到这么多，以后用到的再慢慢补充。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1564,7 +1550,7 @@ concat()    连接两个或更多的数组，并返回结果。 -->
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

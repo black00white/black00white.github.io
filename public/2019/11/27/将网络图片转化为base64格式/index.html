@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近打算自己搭建一个简单的后台，来为自己的前端代码提供基础的接口，学过一些node.js的基础，首先就想到了基于node的express框架，记录下首次搭建的过程。 首先确认电脑上安装了node环境，在命令行工具敲node -v，如果显示除了版本号，则已经安装了node环境。如果没有安装，点击下载链接 http://nodejs.cn/download/，选择和你电脑系统相匹配的版本下载即可。12">
+<meta name="description" content="接上篇文章中说到因为跨域的原因，需要把从后台获取过来的图片链接转换为base64格式，这里就用到了canvas的toDataURL来转换，不多说，上代码。123456789101112131415161718192021222324252627imageToBase64(url,callback)&amp;#123;    var mycanvas = document.createElement(&amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于node环境的express的入门搭建">
-<meta property="og:url" content="http://yoursite.com/2019/10/23/基于node环境的express的入门搭建/index.html">
+<meta property="og:title" content="将网络图片转化为base64格式">
+<meta property="og:url" content="http://yoursite.com/2019/11/27/将网络图片转化为base64格式/index.html">
 <meta property="og:site_name" content="blog">
-<meta property="og:description" content="最近打算自己搭建一个简单的后台，来为自己的前端代码提供基础的接口，学过一些node.js的基础，首先就想到了基于node的express框架，记录下首次搭建的过程。 首先确认电脑上安装了node环境，在命令行工具敲node -v，如果显示除了版本号，则已经安装了node环境。如果没有安装，点击下载链接 http://nodejs.cn/download/，选择和你电脑系统相匹配的版本下载即可。12">
+<meta property="og:description" content="接上篇文章中说到因为跨域的原因，需要把从后台获取过来的图片链接转换为base64格式，这里就用到了canvas的toDataURL来转换，不多说，上代码。123456789101112131415161718192021222324252627imageToBase64(url,callback)&amp;#123;    var mycanvas = document.createElement(&amp;qu">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-23T04:00:55.976Z">
+<meta property="og:updated_time" content="2019-11-27T09:34:30.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于node环境的express的入门搭建">
-<meta name="twitter:description" content="最近打算自己搭建一个简单的后台，来为自己的前端代码提供基础的接口，学过一些node.js的基础，首先就想到了基于node的express框架，记录下首次搭建的过程。 首先确认电脑上安装了node环境，在命令行工具敲node -v，如果显示除了版本号，则已经安装了node环境。如果没有安装，点击下载链接 http://nodejs.cn/download/，选择和你电脑系统相匹配的版本下载即可。12">
+<meta name="twitter:title" content="将网络图片转化为base64格式">
+<meta name="twitter:description" content="接上篇文章中说到因为跨域的原因，需要把从后台获取过来的图片链接转换为base64格式，这里就用到了canvas的toDataURL来转换，不多说，上代码。123456789101112131415161718192021222324252627imageToBase64(url,callback)&amp;#123;    var mycanvas = document.createElement(&amp;qu">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/23/基于node环境的express的入门搭建/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/27/将网络图片转化为base64格式/">
 
 
 
 
 
-  <title>基于node环境的express的入门搭建 | blog</title>
+  <title>将网络图片转化为base64格式 | blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/基于node环境的express的入门搭建/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/将网络图片转化为base64格式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="初夏">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基于node环境的express的入门搭建</h1>
+          <h1 class="post-title" itemprop="name headline">将网络图片转化为base64格式</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-23T11:34:43+08:00">
-                2019-10-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-27T16:50:54+08:00">
+                2019-11-27
               </time>
             
 
@@ -299,18 +299,8 @@
       
 
       
-        <p>最近打算自己搭建一个简单的后台，来为自己的前端代码提供基础的接口，学过一些node.js的基础，首先就想到了基于node的express框架，记录下首次搭建的过程。</p>
-<p>首先确认电脑上安装了node环境，在命令行工具敲node -v，如果显示除了版本号，则已经安装了node环境。如果没有安装，点击下载链接 <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a>，选择和你电脑系统相匹配的版本下载即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">v10.16.0</span><br></pre></td></tr></table></figure></p>
-<font color="#409EFF" face="微软雅黑">安装express</font>
-
-<p>新建一个文件夹，然后在文件夹内执行npm init为应用程序创建 package.json文件，全部回车默认执行即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure></p>
-<p>然后安装express,并将其保存在依赖项列表中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express --save</span><br></pre></td></tr></table></figure></p>
-<font color="#409EFF" face="微软雅黑">初始化express服务</font>
-
-<p>创建一个名为server的文件夹，在里边创建一个app.js，在里边添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;)</span><br><span class="line">var app = express()</span><br><span class="line"></span><br><span class="line">app.get(&apos;/&apos;,function(req,res)&#123;</span><br><span class="line">    res.send(&apos;hello world&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(3000, function()&#123;</span><br><span class="line">    console.log(&apos;hello&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>使用以下命令运行程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure></p>
-<p>然后在浏览器输入<a href="http://localhost:3000/就可以看到刚启动的服务了。" target="_blank" rel="noopener">http://localhost:3000/就可以看到刚启动的服务了。</a></p>
-<p>附express中文网链接<a href="https://expressjs.com/zh-cn/starter/installing.html" target="_blank" rel="noopener">https://expressjs.com/zh-cn/starter/installing.html</a>。</p>
+        <p>接上篇文章中说到因为跨域的原因，需要把从后台获取过来的图片链接转换为base64格式，这里就用到了canvas的toDataURL来转换，不多说，上代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">imageToBase64(url,callback)&#123;</span><br><span class="line">    var mycanvas = document.createElement(&quot;canvas&quot;)</span><br><span class="line">    var ctx = mycanvas.getContext(&apos;2d&apos;)</span><br><span class="line">    //此处最好是获取页面已经有的元素，以方便获取宽高，否则可能会出现获取到的宽高为0，canvas画图失败的问题</span><br><span class="line">    var img = document.querySelector(&apos;.share-img&apos;)</span><br><span class="line">    var data = null</span><br><span class="line">    //这里需要设置crossOrigin的值，允许跨域，不然会报错，一定要在设置完之后再给src赋值</span><br><span class="line">    img.setAttribute(&quot;crossOrigin&quot;,&apos;anonymous&apos;)</span><br><span class="line">    img.src = url;</span><br><span class="line">    var w = parseInt(window.getComputedStyle(img).width);</span><br><span class="line">    var h = parseInt(window.getComputedStyle(img).height);</span><br><span class="line">    mycanvas.width = w</span><br><span class="line">    mycanvas.height = h</span><br><span class="line">    img.onload = function()&#123;</span><br><span class="line">        //一定要在img.onload加载完图片之后再去执行drawImage,否则会因为获取不到图片元素而报错，或者图片没有画到canvas画布上</span><br><span class="line">        // 将图片画到canvas上面上去！</span><br><span class="line">        ctx.drawImage(img,0,0,w,h);</span><br><span class="line">        data = mycanvas.toDataURL(&apos;image/jpeg&apos;)</span><br><span class="line">        //这里一定要回调一下，在回调里获取到base64的值，然后赋值给原来的图片的src</span><br><span class="line">        callback.call(this, data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">this.imageToBase64(this.img,function(url)&#123;</span><br><span class="line">    //本来是在这里直接把返回的base64的值赋值给了this.img以期望页面上的图片地址替换为base64格式，奈何怎么赋值都没有实现，使用了vue的深度监听，也没有监听到img值的变化，至今不知道是什么原因没有监听到，所以就用了最原始的方法直接获取DOM元素，然后给元素的src赋值，这样竟然就实现了</span><br><span class="line">    document.querySelector(&apos;.share-img&apos;).setAttribute(&quot;src&quot;,url)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>踩坑点都已经标注在注释里，在此就不一一解释了，仅作记录。</p>
 
       
     </div>
@@ -335,8 +325,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/19/解决vue打包后的文件放在服务器上，浏览器有缓存的问题/" rel="next" title="解决vue打包后的文件放在服务器上，浏览器有缓存的问题">
-                <i class="fa fa-chevron-left"></i> 解决vue打包后的文件放在服务器上，浏览器有缓存的问题
+              <a href="/2019/11/27/前端实现页面转换为图片，长按保存相册/" rel="next" title="前端实现页面转换为图片，长按保存相册">
+                <i class="fa fa-chevron-left"></i> 前端实现页面转换为图片，长按保存相册
               </a>
             
           </div>
@@ -344,10 +334,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/23/vue项目中网络请求axios的封装/" rel="prev" title="vue项目中网络请求axios的封装">
-                vue项目中网络请求axios的封装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
