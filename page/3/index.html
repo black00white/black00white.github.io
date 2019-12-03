@@ -229,6 +229,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/微信小程序图片、音频上传七牛云/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/23/微信小程序图片、音频上传七牛云/" itemprop="url">微信小程序图片、音频上传七牛云</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-23T22:08:45+08:00">
+                2019-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>图片、音频等文件上传自己的服务器会占用很多的资源，增加服务器的压力，这是后可以考虑上传到第三方，比如七牛云。上传七牛云首先要注册自己的七牛云账号，在此就不赘述。</p>
+<p>获取七牛云token（需要后台去获取，暴露接口给前端）</p>
+<p>调用小程序API获取图片，上传至七牛云</p>
+<p><pre><br>takePhoto() {<br>    var that = this<br>    wx.chooseImage({<br>      count: 1,<br>      sourceType: [‘camera’],<br>      success: function(res) {<br>        var filePath = res.tempFilePaths[0];<br>        // 交给七牛上传<br>        var date = new Date().getTime();<br>        qiniuUploader.upload(filePath, (res) =&gt; {<br>          // 每个文件上传成功后,处理相关的事情<br>          // 其中 info 是文件上传成功后，服务端返回的json，形式如<br>          // {<br>          //    “hash”: “Fh8xVqod2MQ1mocfI4S4KpRL6D98”,<br>          //    “key”: “gogopher.jpg”<br>          //  }<br>          // 参考<a href="http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html" target="_blank" rel="noopener">http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html</a><br>          that.setData({<br>            ‘imageURL’: res.imageURL,<br>          });<br>        }, (error) =&gt; {<br>          console.log(‘error: ‘ + error);<br>        }, {<br>          region: ‘ECN’,<br>          domain: ‘<a href="https://yourUrl.com&#39;" target="_blank" rel="noopener">https://yourUrl.com&#39;</a>, // // bucket 域名，下载资源时用到。如果设置，会在 success callback 的 res 参数加上可以直接使用的 ImageURL 字段。否则需要自己拼接<br>          key: date + ‘.jpg’, // [非必须]自定义文件 key。如果不设置，默认为使用微信小程序 API 的临时文件名<br>          // 以下方法三选一即可，优先级为：uptoken &gt; uptokenURL &gt; uptokenFunc<br>          uptoken: that.data.uptoken, // 由其他程序生成七牛 uptoken//调用接口从后台获取的token<br>          uptokenURL: that.data.uptoken, // 从指定 url 通过 HTTP GET 获取 uptoken，返回的格式必须是 json 且包含 uptoken 字段，例如： {“uptoken”: “[yourTokenString]”}<br>          uptokenFunc: function() {<br>            return that.data.uptoken;<br>          }<br>        }, (res) =&gt; {<br>          // console.log(‘上传进度’, res.progress)<br>          // console.log(‘已经上传的数据长度’, res.totalBytesSent)<br>          // console.log(‘预期需要上传的数据总长度’, res.totalBytesExpectedToSend)<br>          if (res.progress == 100) { //上传完成</pre></p>
+<pre><code>      }
+    });
+  },
+  fail: (res) =&gt; {
+    console.log(res)
+  }
+})
+</code></pre><p>  }<br>  <br>音频的上传类似，需要配置一些音频相关的options</p>
+<p><pre><br>startAudio(){<br>    var that=this</pre></p>
+<pre><code>const options = {
+  duration: 30000, //指定录音的时长，单位 ms
+  sampleRate: 16000, //采样率
+  numberOfChannels: 1, //录音通道数
+  encodeBitRate: 96000, //编码码率
+  format: &apos;mp3&apos;, //音频格式，有效值 aac/mp3
+  frameSize: 50, //指定帧大小，单位 KB
+}
+//开始录音
+recorderManager.start(options);
+recorderManager.onStart(() =&gt; {
+  console.log(&apos;开始录音&apos;)
+});
+
+recorderManager.onStop((res) =&gt; {//停止录音
+
+  this.tempFilePath = res.tempFilePath;
+  console.log(&apos;停止录音&apos;, res.tempFilePath)
+  const {
+    tempFilePath
+  } = res
+
+  //上传七牛云
+  var filePath = res.tempFilePath;
+  // 交给七牛上传
+  var date = new Date().getTime();
+  qiniuUploader.upload(filePath, (res) =&gt; {
+    that.setData({
+      &apos;audioUrl&apos;: res.imageURL,
+    });
+  }, (error) =&gt; {
+    console.log(res)
+  }, {
+    region: &apos;ECN&apos;,
+    domain: &apos;https://yourUrl.com&apos;,
+    key: date + &apos;.mp3&apos;,
+    uptoken: that.data.uptoken,
+    uptokenURL: that.data.uptoken,
+    uptokenFunc: function() {
+      return that.data.uptoken;
+    }
+  }, (res) =&gt; {
+    if (res.progress == 100) { //上传完成
+
+    }
+  });
+})
+</code></pre><p>  }<br>  <br>先分享到这里，如有其它问题可以参看七牛云的相关文档：<br><a href="https://github.com/gpake/qiniu-wxapp-sdk" target="_blank" rel="noopener">https://github.com/gpake/qiniu-wxapp-sdk</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/下拉刷新-上滑加载-vuev插件vue-scroller/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -385,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
