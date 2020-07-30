@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="图片、音频等文件上传自己的服务器会占用很多的资源，增加服务器的压力，这是后可以考虑上传到第三方，比如七牛云。上传七牛云首先要注册自己的七牛云账号，在此就不赘述。 获取七牛云token（需要后台去获取，暴露接口给前端） 调用小程序API获取图片，上传至七牛云 takePhoto() {    var that = this    wx.chooseImage({      count: 1,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序图片、音频上传七牛云">
+<meta property="og:url" content="http://yoursite.com/2019/05/23/微信小程序图片、音频上传七牛云/index.html">
+<meta property="og:site_name" content="blog">
+<meta property="og:description" content="图片、音频等文件上传自己的服务器会占用很多的资源，增加服务器的压力，这是后可以考虑上传到第三方，比如七牛云。上传七牛云首先要注册自己的七牛云账号，在此就不赘述。 获取七牛云token（需要后台去获取，暴露接口给前端） 调用小程序API获取图片，上传至七牛云 takePhoto() {    var that = this    wx.chooseImage({      count: 1,">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-30T07:45:29.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序图片、音频上传七牛云">
+<meta name="twitter:description" content="图片、音频等文件上传自己的服务器会占用很多的资源，增加服务器的压力，这是后可以考虑上传到第三方，比如七牛云。上传七牛云首先要注册自己的七牛云账号，在此就不赘述。 获取七牛云token（需要后台去获取，暴露接口给前端） 调用小程序API获取图片，上传至七牛云 takePhoto() {    var that = this    wx.chooseImage({      count: 1,">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/23/微信小程序图片、音频上传七牛云/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>微信小程序图片、音频上传七牛云 | blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/微信小程序图片、音频上传七牛云/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="初夏">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微信小程序图片、音频上传七牛云
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-23 22:08:45" itemprop="dateCreated datePublished" datetime="2019-05-23T22:08:45+08:00">2019-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 15:45:29" itemprop="dateModified" datetime="2020-07-30T15:45:29+08:00">2020-07-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>图片、音频等文件上传自己的服务器会占用很多的资源，增加服务器的压力，这是后可以考虑上传到第三方，比如七牛云。上传七牛云首先要注册自己的七牛云账号，在此就不赘述。</p>
+<p>获取七牛云token（需要后台去获取，暴露接口给前端）</p>
+<p>调用小程序API获取图片，上传至七牛云</p>
+<p><pre><br>takePhoto() {<br>    var that = this<br>    wx.chooseImage({<br>      count: 1,<br>      sourceType: [‘camera’],<br>      success: function(res) {<br>        var filePath = res.tempFilePaths[0];<br>        // 交给七牛上传<br>        var date = new Date().getTime();<br>        qiniuUploader.upload(filePath, (res) =&gt; {<br>          // 每个文件上传成功后,处理相关的事情<br>          // 其中 info 是文件上传成功后，服务端返回的json，形式如<br>          // {<br>          //    “hash”: “Fh8xVqod2MQ1mocfI4S4KpRL6D98”,<br>          //    “key”: “gogopher.jpg”<br>          //  }<br>          // 参考<a href="http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html" target="_blank" rel="noopener">http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html</a><br>          that.setData({<br>            ‘imageURL’: res.imageURL,<br>          });<br>        }, (error) =&gt; {<br>          console.log(‘error: ‘ + error);<br>        }, {<br>          region: ‘ECN’,<br>          domain: ‘<a href="https://yourUrl.com&#39;" target="_blank" rel="noopener">https://yourUrl.com&#39;</a>, // // bucket 域名，下载资源时用到。如果设置，会在 success callback 的 res 参数加上可以直接使用的 ImageURL 字段。否则需要自己拼接<br>          key: date + ‘.jpg’, // [非必须]自定义文件 key。如果不设置，默认为使用微信小程序 API 的临时文件名<br>          // 以下方法三选一即可，优先级为：uptoken &gt; uptokenURL &gt; uptokenFunc<br>          uptoken: that.data.uptoken, // 由其他程序生成七牛 uptoken//调用接口从后台获取的token<br>          uptokenURL: that.data.uptoken, // 从指定 url 通过 HTTP GET 获取 uptoken，返回的格式必须是 json 且包含 uptoken 字段，例如： {“uptoken”: “[yourTokenString]”}<br>          uptokenFunc: function() {<br>            return that.data.uptoken;<br>          }<br>        }, (res) =&gt; {<br>          // console.log(‘上传进度’, res.progress)<br>          // console.log(‘已经上传的数据长度’, res.totalBytesSent)<br>          // console.log(‘预期需要上传的数据总长度’, res.totalBytesExpectedToSend)<br>          if (res.progress == 100) { //上传完成</pre></p>
+<pre><code>      }
+    });
+  },
+  fail: (res) =&gt; {
+    console.log(res)
+  }
+})
+</code></pre><p>  }<br>  <br>音频的上传类似，需要配置一些音频相关的options</p>
+<p><pre><br>startAudio(){<br>    var that=this</pre></p>
+<pre><code>const options = {
+  duration: 30000, //指定录音的时长，单位 ms
+  sampleRate: 16000, //采样率
+  numberOfChannels: 1, //录音通道数
+  encodeBitRate: 96000, //编码码率
+  format: &apos;mp3&apos;, //音频格式，有效值 aac/mp3
+  frameSize: 50, //指定帧大小，单位 KB
+}
+//开始录音
+recorderManager.start(options);
+recorderManager.onStart(() =&gt; {
+  console.log(&apos;开始录音&apos;)
+});
+
+recorderManager.onStop((res) =&gt; {//停止录音
+
+  this.tempFilePath = res.tempFilePath;
+  console.log(&apos;停止录音&apos;, res.tempFilePath)
+  const {
+    tempFilePath
+  } = res
+
+  //上传七牛云
+  var filePath = res.tempFilePath;
+  // 交给七牛上传
+  var date = new Date().getTime();
+  qiniuUploader.upload(filePath, (res) =&gt; {
+    that.setData({
+      &apos;audioUrl&apos;: res.imageURL,
+    });
+  }, (error) =&gt; {
+    console.log(res)
+  }, {
+    region: &apos;ECN&apos;,
+    domain: &apos;https://yourUrl.com&apos;,
+    key: date + &apos;.mp3&apos;,
+    uptoken: that.data.uptoken,
+    uptokenURL: that.data.uptoken,
+    uptokenFunc: function() {
+      return that.data.uptoken;
+    }
+  }, (res) =&gt; {
+    if (res.progress == 100) { //上传完成
+
+    }
+  });
+})
+</code></pre><p>  }<br>  <br>先分享到这里，如有其它问题可以参看七牛云的相关文档：<br><a href="https://github.com/gpake/qiniu-wxapp-sdk" target="_blank" rel="noopener">https://github.com/gpake/qiniu-wxapp-sdk</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/23/下拉刷新-上滑加载-vuev插件vue-scroller/" rel="prev" title="下拉刷新 上滑加载 vue插件vue-scroller">
+      <i class="fa fa-chevron-left"></i> 下拉刷新 上滑加载 vue插件vue-scroller
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/23/阿里云上传图片（服务器签名后直传）/" rel="next" title="阿里云上传图片（服务器签名后直传）">
+      阿里云上传图片（服务器签名后直传） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">初夏</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">初夏</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
